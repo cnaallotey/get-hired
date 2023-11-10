@@ -1,22 +1,17 @@
 <script setup>
 //import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 //import { auth } from "../firebase/index";
-import { reactive, onBeforeMount } from "vue";
-import { useStore } from "vuex";
-import { auth } from "../firebase/index.js";
 
 const user = reactive({ email: "", password: "" });
 
-const store = useStore();
-const login = () => {
-  store.dispatch("login", user);
-};
+const userSession = useCurrentUser()
 
-onBeforeMount(() => {
-  if (!auth.currentUser) return;
-  router.push("/dashboard");
-  return;
-});
+
+// onBeforeMount(() => {
+//   if (!auth.currentUser) return;
+//   router.push("/dashboard");
+//   return;
+// });
 </script>
 
 <template>
