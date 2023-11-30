@@ -1,8 +1,22 @@
 <script setup>
-//import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-//import { auth } from "../firebase/index";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+const router = useRouter()
+// import { App } from 'firebase-admin/app';
+const userInfo = reactive({ email: "", password: "" });
 
-const user = reactive({ email: "", password: "" });
+const auth = useFirebaseAuth()
+ //const user = await signInWithEmailAndPassword(auth, "test", "test")
+
+ 
+
+ const login = () => {
+  signInWithEmailAndPassword(auth, userInfo.email, userInfo.password).then(() => {
+   router.push("/dashboard")
+ }).catch((error) => {
+   alert(error)
+ })
+ }
+
 
 const userSession = useCurrentUser()
 
@@ -40,7 +54,7 @@ const userSession = useCurrentUser()
 
         <div class="mt-8">
           <div class="mt-6">
-            <form action="submit" @submit.prevent="login()" class="space-y-6">
+            <form action="submit" @submit.prevent="login" class="space-y-6">
               <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">
                   CampusClub ID
@@ -52,7 +66,7 @@ const userSession = useCurrentUser()
                     type="email"
                     autocomplete="email"
                     required
-                    v-model="user.email"
+                    v-model="userInfo.email"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
@@ -69,7 +83,7 @@ const userSession = useCurrentUser()
                     type="password"
                     autocomplete="current-password"
                     required="true"
-                    v-model="user.password"
+                    v-model="userInfo.password"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>

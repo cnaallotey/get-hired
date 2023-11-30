@@ -1,5 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+ app :{
+  head: {
+    script : [
+      {
+        src: 'https://www.google.com/recaptcha/enterprise.js?render=6LcCKiApAAAAAPKIabyfPC_4UnFrs379OqyHF_wo',
+        defer :true
+      }
+    ]
+  },
+ },
   devtools: { enabled: true },
   modules : [
     "@nuxtjs/tailwindcss",
@@ -18,4 +28,5 @@ export default defineNuxtConfig({
       // there could be other properties depending on the project
     },
   },
+
 })
