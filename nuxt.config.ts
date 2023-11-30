@@ -28,5 +28,10 @@ export default defineNuxtConfig({
       // there could be other properties depending on the project
     },
   },
+  tailwindcss: {
+    config: {
+      plugins: [require('@tailwindcss/forms')]
+    }
+  }
 
 })
